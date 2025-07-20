@@ -1,8 +1,8 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view>
-			<text class="title">{{title}}</text>
+	<view class="content" @click="goToDiary">
+		<image class="bg" src="/static/bg.png" mode="aspectFill" />
+		<view class="text-overlay">
+			<text class="thinking-text">在想什么...</text>
 		</view>
 	</view>
 </template>
@@ -18,32 +18,46 @@
 
 		},
 		methods: {
-
+			goToDiary() {
+				uni.navigateTo({
+					url: '/pages/diary/diary'
+				})
+			}
 		}
 	}
 </script>
 
 <style>
 	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+		width: 100%;
+		height: 100vh;
+		position: relative;
+		overflow: hidden;
 	}
 
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin: 200rpx auto 50rpx auto;
+	.bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		object-fit: cover;
 	}
 
-	.text-area {
-		display: flex;
-		justify-content: center;
+	.text-overlay {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 2;
+		text-align: center;
 	}
 
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
+	.thinking-text {
+		font-size: 48rpx;
+		color: #333;
+		font-weight: bold;
+		text-shadow: 2rpx 2rpx 4rpx rgba(255, 255, 255, 0.8);
 	}
 </style>
